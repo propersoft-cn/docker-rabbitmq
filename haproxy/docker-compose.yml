@@ -1,0 +1,13 @@
+haproxy:
+  image: haproxy
+  volumes:
+    - ./haproxy:/usr/local/etc/haproxy # haproxy的配置文件路径
+  extra_hosts:
+    - rabbit@rabbitmq1:172.17.0.4
+    - rabbit@rabbitmq2:172.17.0.5
+    - rabbitmq2:172.17.0.5
+    - rabbitmq1:172.17.0.4
+  ports:
+    - "5600:1080"
+    - "5679:5679"
+    - "61619:61619"

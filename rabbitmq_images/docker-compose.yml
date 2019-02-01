@@ -1,0 +1,43 @@
+  rabbitmq1:
+    hostname: rabbitmq1
+    container_name: rabbitmq1
+    image: "propersoft/docker-rabbitmq"
+    volumes:
+      - ./rabbitmq:/var/lib/rabbitmq
+      - ./.erlang.cookie:/root/.erlang.cookie
+    environment:
+      - RABBITMQ_DEFAULT_USER=proper
+      - RABBITMQ_DEFAULT_PASS=proper
+    extra_hosts:
+      - rabbit@rabbitmq1:172.17.0.4
+      - rabbit@rabbitmq2:172.17.0.5
+      - rabbitmq2:172.17.0.5
+      - rabbitmq1:172.17.0.4
+    ports:
+      - "5677:5672"
+      - "15677:15672"
+      - "61617:61613"
+
+  rabbitmq2:
+    hostname: rabbitmq2
+    container_name: rabbitmq2
+    image: "propersoft/docker-rabbitmq"
+    volumes:
+      - ./rabbitmq2:/var/lib/rabbitmq
+      - ./.erlang.cookie2:/root/.erlang.cookie
+    environment:
+      - RABBITMQ_DEFAULT_USER=proper
+      - RABBITMQ_DEFAULT_PASS=proper
+      - CLUSTERED=true
+      - CLUSTER_WITH=rabbit1
+    extra_hosts:
+      - rabbit@rabbitmq1:172.17.0.4
+      - rabbit@rabbitmq2:172.17.0.5
+      - rabbitmq2:172.17.0.5
+      - rabbitmq1:172.17.0.4
+    ports:
+      - "5676:5672"
+      - "15676:15672"
+      - "61616:61613"
+      - "4369:4369"
+

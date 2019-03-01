@@ -6,7 +6,7 @@
       - ./rabbitmq_config:/etc/rabbitmq
     environment:
       - RABBITMQ_DEFAULT_USER=proper
-      - RABBITMQ_DEFAULT_PASS=brMpD7oJmG
+      - RABBITMQ_DEFAULT_PASS=proper
     ports:
       - "5675:5672"
       - "15675:15672"

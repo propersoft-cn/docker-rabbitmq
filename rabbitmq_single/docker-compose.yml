@@ -1,12 +1,13 @@
-version: '3'
-services:
   rabbitmq-stomp:
     hostname: proper-rabbitmq
     image: "propersoft/docker-rabbitmq"
+    volumes:
+      - ./rabbitmq:/var/lib/rabbitmq
+      - ./rabbitmq_config:/etc/rabbitmq
     environment:
       - RABBITMQ_DEFAULT_USER=proper
       - RABBITMQ_DEFAULT_PASS=proper
     ports:
-      - "5672:5672"
-      - "15672:15672"
-      - "61613:61613"
+      - "5675:5672"
+      - "15675:15672"
+      - "61615:61613"

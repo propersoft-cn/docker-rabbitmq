@@ -6,72 +6,41 @@ services:
     container_name: rabbitmq1
     image: "propersoft/docker-rabbitmq"
     volumes:
+#      - ./rabbitmq1/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
       - ./rabbitmq1_setup.sh:/root/rabbitmq1_setup.sh
       - ./rabbitmq1_cluster.sh:/root/rabbitmq1_cluster.sh
     environment:
       - RABBITMQ_DEFAULT_USER=proper
       - RABBITMQ_DEFAULT_PASS=proper
-    extra_hosts:
-      - rabbit@rabbitmq1:172.18.18.10
-      - rabbit@rabbitmq2:172.18.18.11
-      - rabbitmq2:172.18.18.11
-      - rabbitmq1:172.18.18.10
     ports:
       - "5677:5672"
       - "15677:15672"
       - "61617:61613"
-    networks:
-      app_net:
-        ipv4_address: 172.18.18.10
 
   rabbitmq2:
     hostname: rabbitmq2
     container_name: rabbitmq2
     image: "propersoft/docker-rabbitmq"
     volumes:
+ #`     - ./rabbitmq2/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
       - ./rabbitmq2_setup.sh:/root/rabbitmq2_setup.sh
     environment:
       - RABBITMQ_DEFAULT_USER=proper
       - RABBITMQ_DEFAULT_PASS=proper
       - CLUSTERED=true
       - CLUSTER_WITH=rabbit1
-    extra_hosts:
-      - rabbit@rabbitmq1:172.18.18.10
-      - rabbit@rabbitmq2:172.18.18.11
-      - rabbitmq2:172.18.18.11
-      - rabbitmq1:172.18.18.10
     ports:
       - "5676:5672"
       - "15676:15672"
       - "61616:61613"
       - "4369:4369"
-    networks:
-      app_net:
-        ipv4_address: 172.18.18.11
 
   haproxy:
     image: haproxy:1.8
     volumes:
       - ./haproxy:/usr/local/etc/haproxy # haproxy的配置文件路径
-    extra_hosts:
-      - rabbit@rabbitmq1:172.18.18.10
-      - rabbit@rabbitmq2:172.18.18.11
-      - rabbitmq2:172.18.18.11
-      - rabbitmq1:172.18.18.10
     ports:
       - "5600:1080"
       - "5679:5679"
       - "61619:61619"
-
-
-networks:
-  app_net:
-    driver: bridge
-    driver_opts:
-      com.docker.network.enable_ipv6: "false"
-    ipam:
-      driver: default
-      config:
-      - subnet: 172.18.18.0/24
-        gateway: 172.18.18.1
-
+      - "15679:15679"

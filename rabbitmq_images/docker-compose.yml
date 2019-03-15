@@ -10,6 +10,7 @@ services:
       - ./rabbitmq1_setup.sh:/root/rabbitmq1_setup.sh
       - ./rabbitmq1_cluster.sh:/root/rabbitmq1_cluster.sh
     environment:
+      - RABBIT_COOKIE=SFSYARVMJCVAEEPEMZUL
       - RABBITMQ_DEFAULT_USER=proper
       - RABBITMQ_DEFAULT_PASS=proper
     ports:
@@ -25,6 +26,7 @@ services:
  #`     - ./rabbitmq2/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
       - ./rabbitmq2_setup.sh:/root/rabbitmq2_setup.sh
     environment:
+      - RABBIT_COOKIE=SFSYARVMJCVAEEPEMZUL
       - RABBITMQ_DEFAULT_USER=proper
       - RABBITMQ_DEFAULT_PASS=proper
       - CLUSTERED=true

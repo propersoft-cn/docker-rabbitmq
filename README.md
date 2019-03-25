@@ -6,10 +6,10 @@ $ docker pull propersoft/docker-rabbitmq
 $ docker-compose up -d
 ```
 
-You can then go to `http://localhost:15672` or `http://host-ip:15672` in a browser,
+You can then go to `http://localhost:15675` or `http://host-ip:15675` in a browser,
 login with the username and password of `proper` / `proper`.
 
-Use port `61613` for STOMP connections.
+Use port `61615` for STOMP connections.
 
 单节点部署
 

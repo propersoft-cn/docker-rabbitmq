@@ -3,7 +3,6 @@
     image: "propersoft/docker-rabbitmq"
     volumes:
       - ./rabbitmq:/var/lib/rabbitmq
-      - ./rabbitmq_config:/etc/rabbitmq
     environment:
       - RABBITMQ_DEFAULT_USER=proper
       - RABBITMQ_DEFAULT_PASS=proper

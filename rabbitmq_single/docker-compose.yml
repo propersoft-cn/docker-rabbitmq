@@ -6,6 +6,7 @@
     environment:
       - RABBITMQ_DEFAULT_USER=proper
       - RABBITMQ_DEFAULT_PASS=proper
+      - RABBITMQ_LOGS=/var/lib/rabbitmq/rabbitmq.log      
     ports:
       - "5675:5672"
       - "15675:15672"

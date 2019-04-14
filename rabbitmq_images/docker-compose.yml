@@ -9,10 +9,12 @@ services:
 #      - ./rabbitmq1/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
       - ./rabbitmq1_setup.sh:/root/rabbitmq1_setup.sh
       - ./rabbitmq1_cluster.sh:/root/rabbitmq1_cluster.sh
+      - ./rabbitmq:/var/lib/rabbitmq
     environment:
       - RABBIT_COOKIE=SFSYARVMJCVAEEPEMZUL
       - RABBITMQ_DEFAULT_USER=proper
       - RABBITMQ_DEFAULT_PASS=proper
+      - RABBITMQ_LOGS=/var/lib/rabbitmq/rabbitmq.log
     ports:
       - "5677:5672"
       - "15677:15672"
@@ -25,12 +27,14 @@ services:
     volumes:
  #`     - ./rabbitmq2/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
       - ./rabbitmq2_setup.sh:/root/rabbitmq2_setup.sh
+      - ./rabbitmq:/var/lib/rabbitmq
     environment:
       - RABBIT_COOKIE=SFSYARVMJCVAEEPEMZUL
       - RABBITMQ_DEFAULT_USER=proper
       - RABBITMQ_DEFAULT_PASS=proper
       - CLUSTERED=true
       - CLUSTER_WITH=rabbit1
+      - RABBITMQ_LOGS=/var/lib/rabbitmq/rabbitmq.log
     ports:
       - "5676:5672"
       - "15676:15672"
